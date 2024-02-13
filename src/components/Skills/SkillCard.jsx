@@ -1,4 +1,5 @@
 import { IconContext } from "react-icons";
+import parse from 'html-react-parser';
 
 import {
   DiPhotoshop,
@@ -31,7 +32,6 @@ const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
   const stacks = tech?.stacks;
   const TechComponent = eval(tech?.icon);
   return (
-    <IconContext.Provider value={{ size: "2em" }}>
       <div
         onClick={() => setCollapsOn(false)}
         tabIndex={tech.id}
@@ -43,7 +43,7 @@ const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
           <div className="flex items-center gap-3">
             <span>
               {/* tech icon */}
-              {<TechComponent />}
+              {<TechComponent size='44' />}
             </span>
             <div>
               {/* Tech Title */}
@@ -60,7 +60,7 @@ const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
             return (
               <div key={i} className="flex items-center gap-1">
                 {/* stack icon */}
-                <IconComponent key={i} />
+                <IconComponent size='32' />
                 {/* <span><SiCanva /></span> */}
                 {/* stack title */}
                 <p>{stack.title}</p>
@@ -69,7 +69,6 @@ const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
           })}
         </div>
       </div>
-    </IconContext.Provider>
   );
 };
 
