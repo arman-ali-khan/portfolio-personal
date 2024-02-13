@@ -1,6 +1,8 @@
 import { IconContext } from "react-icons";
 import parse from 'html-react-parser';
 
+
+
 import {
   DiPhotoshop,
   DiIllustrator,
@@ -26,6 +28,7 @@ import {
   BiLogoNodejs,
   BiCodeCurly,
 } from "react-icons/bi";
+import React from "react";
 
 const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
   // get stacks from tech
@@ -57,10 +60,14 @@ const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
           {/* stack skills */}
           {stacks.map((stack, i) => {
             const IconComponent = eval(stack?.icon);
+            let iconComponent = React.createElement(IconComponent,{size:32});
+           
+
+          console.log(iconComponent,'iconComponent')
             return (
               <div key={i} className="flex items-center gap-1">
                 {/* stack icon */}
-                <IconComponent size='32' />
+                {iconComponent}
                 {/* <span><SiCanva /></span> */}
                 {/* stack title */}
                 <p>{stack.title}</p>
