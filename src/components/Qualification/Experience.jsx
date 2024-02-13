@@ -1,7 +1,7 @@
 
 const Experience = ({experience}) => {
     return (
-        <div data-aos="fade-up" className={`${(experience.id===2 || experience.id===4 || experience.id===6) ? 'sm:-left-12  border-l border-b relative rounded-bl-3xl border-gray-400':'border-r text-right border-b border-gray-400 rounded-br-3xl'} `} key={experience.id}>
+        <div data-aos="fade-up" className={`${(experience.id===2 || experience.id===4 || experience.id===6) ? 'de-expe-one':'de-expe-two'} `} key={experience.id}>
         <div className={`flex w-full px-4`}>
           <div className="flex flex-col p-4  w-full my-3">
             {/* experience title */}

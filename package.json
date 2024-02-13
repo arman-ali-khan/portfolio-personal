@@ -16,13 +16,17 @@
     "dotenv": "^16.3.1",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
+    "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
+    "react-scroll-parallax": "^3.4.5",
     "react-simple-typewriter": "^5.0.1",
+    "react-spinners-kit": "^1.9.1",
     "styled-components": "^6.0.7",
-    "swiper": "^10.2.0"
+    "swiper": "^10.2.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "title": "Designer",
+    "experience": 5,
+    "icon": "HiOutlineColorSwatch",
+    "stacks": [
+      {
+        "title": "Canva",
+        "icon": "SiCanva"
+      },
+      {
+        "title": "Photoshop",
+        "icon": "DiPhotoshop"
+      },
+      {
+        "title": "Illustrator",
+        "icon": "DiIllustrator"
+      },
+      {
+        "title": "Figma",
+        "icon": "FiFigma"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Frontend developer",
+    "experience": 4,
+    "icon": "BiCodeCurly",
+    "stacks": [
+      {
+        "title": "HTML",
+        "icon": "AiOutlineHtml5"
+      },
+      {
+        "title": "CSS",
+        "icon": "DiCss3Full"
+      },
+      {
+        "title": "Bootstrap",
+        "icon": "TbBrandBootstrap"
+      },
+      {
+        "title": "Tailwind",
+        "icon": "BiLogoTailwindCss"
+      },
+      {
+        "title": "ReactJS",
+        "icon": "BiLogoReact"
+      },
+      {
+        "title": "NextJS",
+        "icon": "TbBrandNextjs"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Backend Developer",
+    "experience": 2,
+    "icon": "BsCodeSlash",
+    "stacks": [
+      {
+        "title": "NodeJs",
+        "icon": "BiLogoNodejs"
+      },
+      {
+        "title": "Laravel",
+        "icon": "DiLaravel"
+      },
+      {
+        "title": "NextJS",
+        "icon": "TbBrandNextjs"
+      },
+      {
+        "title": "Express",
+        "icon": "SiExpress"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Tools",
+    "experience": 3,
+    "icon": "LiaToolsSolid",
+    "stacks": [
+      {
+        "title": "VS Code",
+        "icon": "TbBrandVscode"
+      },
+      {
+        "title": "Github",
+        "icon": "FiGithub"
+      },
+      {
+        "title": "DevTool",
+        "icon": "CgBrowser"
+      },
+      {
+        "title": "Redux",
+        "icon": "TbBrandRedux"
+      }
+    ]
+  }
+]

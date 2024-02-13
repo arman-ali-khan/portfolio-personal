@@ -7,6 +7,162 @@ body {
 }
 
 @layer utilities {
+  /* tailwind custom style */
+
+  .de-container {
+    @apply sm:my-12 container mx-auto overflow-hidden;
+  }
+  .bg {
+    @apply bg-gradient-to-br from-indigo-500 to-purple-600 hover:bg-gradient-to-b hover:duration-300;
+  }
+  .hero-wrapper {
+    @apply w-full flex flex-col-reverse sm:flex-row h-[500px] sm:h-[700px] items-center;
+  }
+  .icons-wrap {
+    @apply sm:absolute md:pl-3 top-32 left-0 sm:top-64 sm:left-auto;
+  }
+  .de-name {
+    @apply w-full -my-2 justify-center sm:justify-normal py-5 sm:py-0 flex;
+  }
+  .de-title {
+    @apply w-full flex justify-center sm:justify-normal py-2 text-xl;
+  }
+  .de-description {
+    @apply w-full flex py-2 justify-center sm:justify-normal text-center sm:text-start text-sm;
+  }
+  .de-resume {
+    @apply w-full flex justify-center sm:justify-start py-2 text-sm;
+  }
+  .de-resume-link {
+    @apply bg text-white duration-300 hover:shadow-xl btn rounded-full px-4 py-3;
+  }
+  .de-hero {
+    @apply md:w-1/2 w-full md:h-full sm:h-64  flex justify-center items-center;
+  }
+  .link {
+    @apply hover:text-blue-500 duration-300;
+  }
+  .de-hero-image {
+    @apply w-64 sm:w-72 md:w-auto mask mask-squircle bg;
+  }
+  .de-scroll {
+    @apply rounded-full flex justify-center items-center py-2 hover:pt-4 duration-300 flex-col px-1 animate-pulse;
+  }
+  .de-intro {
+    @apply sm:flex sm:justify-between gap-12 sm:gap-0 lg:gap-12 items-center;
+  }
+  .de-experience {
+    @apply flex sm:flex-col lg:flex-row my-3 sm:my-0 justify-between sm:text-center mx-auto space-x-3 items-center;
+  }
+  .de-skill {
+    @apply w-full flex flex-col-reverse items-center sm:flex-row;
+  }
+  .de-parallax-wrap {
+    @apply w-9/12 my-4 flex items-center sm:my-0 mx-auto h-full;
+  }
+  .de-parallax {
+    @apply rotate-180 w-72 sm:w-64 md:w-72 lg:w-80 xl:w-96 border-4 border-orange-500 rounded-full h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 relative flex items-center justify-center;
+  }
+  .de-logo-wrap {
+    @apply absolute text-4xl h-14 flex items-center justify-center;
+  }
+  .de-logo {
+    @apply w-44 rotate-180 bg-base-100 border-2 border-orange-500 md:border-4 mask mask-squircle rounded-3xl p-0.5 md:p-1;
+  }
+  .de-active {
+    @apply text-blue-500 font-bold border-b pb-2 text-xl duration-300
+    text-blue-500 font-bold border-b pb-2 text-xl duration-300;
+  }
+  .de-edu {
+    @apply sm:left-12 text-right border-r border-b relative rounded-br-3xl border-gray-400;
+  }
+  .de-expe-two {
+    @apply border-r text-right border-b border-gray-400 rounded-br-3xl;
+  }
+  .de-expe-one {
+    @apply sm:-left-12  border-l border-b relative rounded-bl-3xl border-gray-400;
+  }
+  .de-service-wrap {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full;
+  }
+  .de-service {
+    @apply py-8 px-3 border rounded-md border-gray-300 transform transition duration-300 ease-in-out hover:-translate-y-2;
+  }
+  .de-category {
+    @apply relative z-10 px-3 -mt-20 text-center bg-base-100 dark:border rounded-lg shadow-lg mx-2 py-3;
+  }
+  .de-category-wrap {
+    @apply inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition duration-300 md:py-3 lg:px-8;
+  }
+  .de-portfolio {
+    @apply grid grid-cols-1 px-3 sm:grid-cols-2 md:grid-cols-3 gap-1 md:gap-5;
+  }
+  .de-portfolio-link {
+    @apply inline-block py-2 md:py-3 text-sm font-semibold transition border rounded-md px-7 hover:bg text-blue-500 hover:text-white;
+  }
+  .de-port-title {
+    @apply text-sm md:text-base lg:text-xl font-bold text-base-content;
+  }
+  .de-port-cat {
+    @apply block text-sm font-semibold text-blue-500;
+  }
+  .de-test-wrap {
+    @apply flex h-full items-center justify-center mx-auto lg:px-10;
+  }
+  .de-test-image-wrap {
+    @apply flex flex-col items-center justify-center p-8 rounded-b-lg;
+  }
+  .de-test-image {
+    @apply w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full dark:bg-gray-500;
+  }
+  .de-test-message-wrap {
+    @apply px-4 py-12 rounded-t-lg sm:px-8 md:px-12;
+  }
+  .de-icon-right {
+    @apply absolute right-0 text-2xl md:text-4xl;
+  }
+  .de-icon-left {
+    @apply text-2xl md:text-4xl;
+  }
+  .de-test-message {
+    @apply relative px-6 py-1 text-lg italic text-center;
+  }
+  .de-contact-wrap {
+    @apply block rounded-lg backdrop-blur-[30px];
+  }
+  .de-contact {
+    @apply w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-6/12 lg:px-6;
+  }
+  .de-error {
+    @apply text-error pt-1 inline-block;
+  }
+  .de-input {
+    @apply input rounded input-bordered w-full;
+  }
+  .de-address {
+    @apply w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:w-full lg:px-6;
+  }
+  .de-footer-wrap {
+    @apply footer container mx-auto overflow-hidden footer-center p-10  text-base-content rounded;
+  }
+  .de-facebook {
+    @apply bg-blue-700 rounded-full p-1 text-white;
+  }
+  .de-twitter {
+    @apply bg-blue-400 rounded-full p-1 text-white;
+  }
+  .de-discord {
+    @apply bg-blue-600 rounded-full p-1 text-white;
+  }
+  .de-bottom-container {
+    @apply fixed sm:bottom-6 bottom-1 overflow-hidden w-full z-50;
+  }
+  .de-bottom-wrap {
+    @apply flex w-full overflow-hidden sm:w-96 backdrop-blur-lg backdrop-hue-rotate-15 backdrop-brightness-90 backdrop-saturate-150  border-blue-500 border rounded-full;
+  }
+  .de-bottom-link {
+    @apply w-full flex rounded-l-full hover:backdrop-blur-xl hover:backdrop-brightness-200 hover:backdrop-contrast-200 hover:backdrop-hue-rotate-180 duration-300 hover:shadow-xl flex-col text-xs text-center;
+  }
   /* ========= Design Scrollbar ========== */
   /* width */
   ::-webkit-scrollbar {
@@ -20,12 +176,11 @@ body {
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #60a5fa;
-    border-radius: 30px;
+    @apply bg rounded-full;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #60a5fa;
+    @apply bg;
   }
 }

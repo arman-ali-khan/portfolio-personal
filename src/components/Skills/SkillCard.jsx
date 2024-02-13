@@ -1,42 +1,75 @@
+import { IconContext } from "react-icons";
+
+import {
+  DiPhotoshop,
+  DiIllustrator,
+  DiLaravel,
+  DiCss3Full,
+} from "react-icons/di";
+import { FiGithub, FiFigma } from "react-icons/fi";
+import { AiOutlineHtml5 } from "react-icons/ai";
+import { BsCodeSlash } from "react-icons/bs";
+import { CgBrowser } from "react-icons/cg";
+import { LiaToolsSolid } from "react-icons/lia";
+import { HiOutlineColorSwatch } from "react-icons/hi";
+import { SiCanva, SiExpress } from "react-icons/si";
+import {
+  TbBrandBootstrap,
+  TbBrandNextjs,
+  TbBrandRedux,
+  TbBrandVscode,
+} from "react-icons/tb";
+import {
+  BiLogoTailwindCss,
+  BiLogoReact,
+  BiLogoNodejs,
+  BiCodeCurly,
+} from "react-icons/bi";
+
 const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
   // get stacks from tech
   const stacks = tech?.stacks;
+  const TechComponent = eval(tech?.icon);
   return (
-    <div
-      onClick={() => setCollapsOn(false)}
-      tabIndex={tech.id}
-      className={`collapse ${
-        collapsOn && tech.id === 1 ? "collapse-open" : ""
-      } collapse-arrow border border-base-300 bg-base-200`}
-    >
-      <div className="collapse-title text-xl font-medium">
-        <div className="flex items-center gap-3">
-          <span>
-            {/* tech icon */}
-            {tech?.icon}
-          </span>
-          <div>
-            {/* Tech Title */}
-            <h2 className="font-bold">{tech?.title}</h2>
-            {/* tech experience */}
-            <p className="text-sm">More than {tech?.experience} years</p>
+    <IconContext.Provider value={{ size: "2em" }}>
+      <div
+        onClick={() => setCollapsOn(false)}
+        tabIndex={tech.id}
+        className={`collapse ${
+          collapsOn && tech.id === 1 ? "collapse-open" : ""
+        } collapse-arrow border border-base-300 bg-base-200`}
+      >
+        <div className="collapse-title text-xl font-medium">
+          <div className="flex items-center gap-3">
+            <span>
+              {/* tech icon */}
+              {<TechComponent />}
+            </span>
+            <div>
+              {/* Tech Title */}
+              <h2 className="font-bold">{tech?.title}</h2>
+              {/* tech experience */}
+              <p className="text-sm">More than {tech?.experience} years</p>
+            </div>
           </div>
         </div>
+        <div className="collapse-content flex gap-4 flex-wrap">
+          {/* stack skills */}
+          {stacks.map((stack, i) => {
+            const IconComponent = eval(stack?.icon);
+            return (
+              <div key={i} className="flex items-center gap-1">
+                {/* stack icon */}
+                <IconComponent key={i} />
+                {/* <span><SiCanva /></span> */}
+                {/* stack title */}
+                <p>{stack.title}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="collapse-content flex gap-4 flex-wrap">
-        {/* stack skills */}
-        {stacks.map((stack, i) => {
-          return (
-            <div key={i} className=" flex items-center gap-1">
-              {/* stack icon */}
-              <span>{stack.icon}</span>
-              {/* stack title */}
-              <p>{stack.title}</p>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    </IconContext.Provider>
   );
 };
 

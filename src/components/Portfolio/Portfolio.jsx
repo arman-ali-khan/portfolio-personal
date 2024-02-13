@@ -1,83 +1,34 @@
 import { useState } from "react";
+import { Parallax } from "react-scroll-parallax";
+import useGetData from "../../../lib/useGetData";
 import PortfolioCard from "./PortfolioCard";
 
 const Portfolio = () => {
   const [showCard, setShowCard] = useState("all");
 
+
   const handleProject = (category) => {
     setShowCard(category);
   };
 
-  // fake portfolio data
-  const portfolioData = [
-    {
-      image: "/portfolio/agency1.png",
-      category: "Agency",
-      title: "Creative Agency",
-      githuUrl: "#",
-      liveLink: "#",
-    },
-    {
-      image: "/portfolio/ecommerce1.png",
-      category: "Ecommerce",
-      title: "Creative Ecommerce",
-      githuUrl: "#",
-      liveLink: "#",
-    },
-    {
-      image: "/portfolio/portfolio1.png",
-      category: "Portfolio",
-      title: "Creative Portfolio",
-      githuUrl: "#",
-      liveLink: "#",
-    },
-    {
-      image: "/portfolio/ecommerce2.png",
-      category: "Ecommerce",
-      title: "Creative Ecommerce",
-      githuUrl: "#",
-      liveLink: "#",
-    },
-    {
-      image: "/portfolio/agency2.png",
-      category: "Agency",
-      title: "Creative Agency",
-      githuUrl: "#",
-      liveLink: "#",
-    },
-    {
-      image: "/portfolio/portfolio2.png",
-      category: "Portfolio",
-      title: "Creative Portfolio",
-      githuUrl: "#",
-      liveLink: "#",
-    },
-  ];
-
+  // fetch portfolio data
+  const { data,loading,error } = useGetData('/data/portfolio.json')
+  // portfolio data
+  const portfolioData = data?.data
   // category data
-  const categoryData = [
-    {
-      value: "all",
-      label: "All",
-    },
-    {
-      value: "ecommerce",
-      label: "Ecommerce",
-    },
-    {
-      value: "agency",
-      label: "Agency",
-    },
-    {
-      value: "portfolio",
-      label: "Portfolio",
-    },
-  ];
+  const categoryData = data?.categories
+  // error handling
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
-    <section className="container mx-auto overflow-hidden">
+    <Parallax speed={-10}>
+    <section className="de-container">
       {/* Title */}
       <div className="text-center my-6" id="portfolio">
+      <Parallax scale={[1.2, 1, 'easeInQuad']}>
         <h2 className="text-3xl font-bold">Portfolio</h2>
+        </Parallax>
         <p>What i offer</p>
       </div>
       {/* Body */}
@@ -92,9 +43,9 @@ const Portfolio = () => {
                       {/* Category Button */}
                       <button
                         onClick={() => handleProject(category.value)}
-                        className={`inline-block rounded-lg py-2 px-5 text-center text-base font-semibold transition md:py-3 lg:px-8 ${
+                        className={`de-category-wrap ${
                           showCard === category.value
-                            ? "activeClasses bg-blue-400 text-white"
+                            ? "activeClasses bg text-white"
                             : "inactiveClasses"
                         }`}
                       >
@@ -107,7 +58,7 @@ const Portfolio = () => {
               </ul>
             </div>
           </div>
-          <div className="grid grid-cols-1 px-3 sm:grid-cols-2 md:grid-cols-3 gap-1 md:gap-5">
+          <div className="de-portfolio">
             {/* Portfolio Card */}
             {portfolioData.map((portfolio, i) => (
               <PortfolioCard
@@ -120,6 +71,7 @@ const Portfolio = () => {
         </div>
       </div>
     </section>
+      </Parallax>
   );
 };
 

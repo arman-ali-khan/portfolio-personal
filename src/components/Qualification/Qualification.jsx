@@ -1,58 +1,26 @@
 import { useState } from "react";
+import { Parallax } from "react-scroll-parallax";
 import Education from "./Education";
 import Experience from "./Experience";
+import useGetData from "../../../lib/useGetData";
 
 const Qualification = () => {
   // toggle education and experience
   const [toggle, setToggle] = useState("education");
+  // get data
+  const {data} = useGetData('/data/qualification.json')
   // education data
-  const educationData = [
-    {
-      id: 1,
-      title: "High School Degree",
-      year: "2015 - 2017",
-      institute: "Carmichael College, Rangpur",
-    },
-    {
-      id: 2,
-      title: "Bachelor's Degree",
-      year: "2017 - 2023",
-      institute: "DCC-Dhaka City College",
-    },
-    {
-      id: 3,
-      title: "Master Degree",
-      year: "2023 - 2024",
-      institute: "DU-Dhaka University",
-    },
-  ];
+  const educationData =data?.educations
   // experience data
-  const experienceData = [
-    {
-      id: 1,
-      title: "UI/UX Designer",
-      year: "2015 - 2017",
-      institute: "Ollyo - Dhaka, Bangladesh",
-    },
-    {
-      id: 2,
-      title: "Frontend Developer",
-      year: "2017 - 2023",
-      institute: "Wipro Limited - India",
-    },
-    {
-      id: 3,
-      title: "Full-Stack Developer",
-      year: "2023 - 2024",
-      institute: "Grab - Singapore",
-    },
-  ];
+  const experienceData = data?.experiences
   return (
-    <section className="container mx-auto">
+    <section className="de-container">
       <div className="sm:w-96 mx-auto">
         {/* Title */}
         <div className="text-center mt-6 mb-12" id="qualification">
+        <Parallax scale={[1.2, 1, 'easeInQuad']}>
           <h2 className="text-3xl font-bold">Qualification</h2>
+          </Parallax>
           <p>My persolan journey</p>
         </div>
         {/* Toggle button */}
@@ -63,7 +31,7 @@ const Qualification = () => {
               onClick={() => setToggle("education")}
               className={`${
                 toggle === "education"
-                  ? "text-blue-500 font-bold border-b pb-2 text-xl duration-300"
+                  ? "de-active"
                   : "font-thin"
               }`}
             >
@@ -74,7 +42,7 @@ const Qualification = () => {
               onClick={() => setToggle("experience")}
               className={`${
                 toggle === "experience"
-                  ? "text-blue-500 font-bold border-b pb-2 text-xl duration-300"
+                  ? "de-active"
                   : "font-thin"
               }`}
             >

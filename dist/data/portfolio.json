@@ -1,0 +1,64 @@
+{
+  "categories": [
+    {
+      "value": "all",
+      "label": "All"
+    },
+    {
+      "value": "ecommerce",
+      "label": "Ecommerce"
+    },
+    {
+      "value": "agency",
+      "label": "Agency"
+    },
+    {
+      "value": "portfolio",
+      "label": "Portfolio"
+    }
+  ],
+  "data": [
+    {
+      "image": "https://aboutwebreach.com/wp-content/uploads/2018/09/for-Website-Design-Services.png",
+      "category": "Agency",
+      "title": "Creative Agency",
+      "githuUrl": "#",
+      "liveLink": "#"
+    },
+    {
+      "image": "https://www.seotask.in/wp-content/uploads/2022/08/website-design-company-in-mumbai-Moukup3-1536x718.png",
+      "category": "Ecommerce",
+      "title": "Creative Ecommerce",
+      "githuUrl": "#",
+      "liveLink": "#"
+    },
+    {
+      "image": "https://www.creative-asset.co.uk/wp-content/uploads/bb-plugin/cache/ecommerce-website-design-uk-1024x682-landscape.jpg",
+      "category": "Portfolio",
+      "title": "Creative Portfolio",
+      "githuUrl": "#",
+      "liveLink": "#"
+    },
+    {
+      "image": "https://www.creative-asset.co.uk/wp-content/uploads/bb-plugin/cache/Junction-28-Remaps-1024x682-landscape.jpg",
+      "category": "Ecommerce",
+      "title": "Creative Ecommerce",
+      "githuUrl": "#",
+      "liveLink": "#"
+    },
+    {
+      "image": "https://www.windmillstrategy.com/wp-content/uploads/2022/09/B2B-Industry-WebDesign-Path-Robotics-Featured-1.png",
+      "category": "Agency",
+      "title": "Creative Agency",
+      "githuUrl": "#",
+      "liveLink": "#"
+    },
+    {
+      "image": "https://www.searchenginejournal.com/wp-content/uploads/2019/12/5-ways-seo-web-design-go-together-5e2945dd5df37-760x400.webp",
+      "category": "Portfolio",
+      "title": "Creative Portfolio",
+      "githuUrl": "#",
+      "liveLink": "#"
+    }
+  ]
+}
