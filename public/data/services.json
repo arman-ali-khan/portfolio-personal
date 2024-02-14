@@ -2,37 +2,37 @@
   {
     "id": 0,
     "name": "SEO Services",
-    "icon": "BiSearchAlt",
+    "icon": "/icons/seo.svg",
     "description": " This is a wider card with supporting text below as a natural content."
   },
   {
     "id": 1,
     "name": "Frontend Developer",
-    "icon": "BiCodeCurly",
+    "icon": "/icons/frontend.svg",
     "description": " This is a wider card with supporting text below as a natural content."
   },
   {
     "id": 2,
     "name": "UI/UX Designer",
-    "icon": "HiOutlineColorSwatch",
+    "icon": "/icons/uiux.svg",
     "description": " This is a wider card with supporting text below as a natural content."
   },
   {
     "id": 3,
     "name": "Branding Designer",
-    "icon": "GiPencilBrush",
+    "icon": "/icons/brand.svg",
     "description": " This is a wider card with supporting text below as a natural content."
   },
   {
     "id": 4,
     "name": "Digital Marketing",
-    "icon": "TbMoneybag",
+    "icon": "/icons/digital.svg",
     "description": " This is a wider card with supporting text below as a natural content."
   },
   {
     "id": 5,
-    "name": "Bakcend Developer",
-    "icon": "BsCode",
+    "name": "Backend Developer",
+    "icon": "/icons/backend.svg",
     "description": " This is a wider card with supporting text below as a natural content."
   }
 ]
