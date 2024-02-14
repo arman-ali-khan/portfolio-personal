@@ -51,7 +51,7 @@ export default function Testimonial() {
                     <img
                       src={testimonial?.image}
                       alt={testimonial.name}
-                      className="de-test-image"
+                      className="de-test-image bg"
                     />
                     {/* User name */}
                     <p className="text-xl font-semibold leadi">

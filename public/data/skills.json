@@ -3,23 +3,23 @@
     "id": 1,
     "title": "Designer",
     "experience": 5,
-    "icon": "HiOutlineColorSwatch",
+    "icon": "/icons/design.svg",
     "stacks": [
       {
         "title": "Canva",
-        "icon": "SiCanva"
+        "icon": "/icons/canva.svg"
       },
       {
         "title": "Photoshop",
-        "icon": "DiPhotoshop"
+        "icon": "/icons/photoshop.svg"
       },
       {
         "title": "Illustrator",
-        "icon": "DiIllustrator"
+        "icon": "/icons/illustrator.svg"
       },
       {
         "title": "Figma",
-        "icon": "FiFigma"
+        "icon": "/icons/figma.svg"
       }
     ]
   },
@@ -27,31 +27,31 @@
     "id": 2,
     "title": "Frontend developer",
     "experience": 4,
-    "icon": "BiCodeCurly",
+    "icon": "/icons/frontend.svg",
     "stacks": [
       {
         "title": "HTML",
-        "icon": "AiOutlineHtml5"
+        "icon": "/icons/html.svg"
       },
       {
         "title": "CSS",
-        "icon": "DiCss3Full"
+        "icon": "/icons/css.svg"
       },
       {
         "title": "Bootstrap",
-        "icon": "TbBrandBootstrap"
+        "icon": "/icons/bootstrap.svg"
       },
       {
         "title": "Tailwind",
-        "icon": "BiLogoTailwindCss"
+        "icon": "/icons/tailwind.svg"
       },
       {
         "title": "ReactJS",
-        "icon": "BiLogoReact"
+        "icon": "/icons/react.svg"
       },
       {
         "title": "NextJS",
-        "icon": "TbBrandNextjs"
+        "icon": "/icons/next.svg"
       }
     ]
   },
@@ -59,23 +59,23 @@
     "id": 3,
     "title": "Backend Developer",
     "experience": 2,
-    "icon": "BsCodeSlash",
+    "icon": "/icons/backend.svg",
     "stacks": [
       {
         "title": "NodeJs",
-        "icon": "BiLogoNodejs"
+        "icon": "/icons/node.svg"
       },
       {
         "title": "Laravel",
-        "icon": "DiLaravel"
+        "icon": "/icons/laravel.svg"
       },
       {
         "title": "NextJS",
-        "icon": "TbBrandNextjs"
+        "icon": "/icons/next.svg"
       },
       {
         "title": "Express",
-        "icon": "SiExpress"
+        "icon": "/icons/express.svg"
       }
     ]
   },
@@ -83,23 +83,23 @@
     "id": 4,
     "title": "Tools",
     "experience": 3,
-    "icon": "LiaToolsSolid",
+    "icon": "/icons/tools.svg",
     "stacks": [
       {
         "title": "VS Code",
-        "icon": "TbBrandVscode"
+        "icon": "/icons/vscode.svg"
       },
       {
         "title": "Github",
-        "icon": "FiGithub"
+        "icon": "/icons/github.svg"
       },
       {
         "title": "DevTool",
-        "icon": "CgBrowser"
+        "icon": "/icons/devtool.svg"
       },
       {
         "title": "Redux",
-        "icon": "TbBrandRedux"
+        "icon": "/icons/redux.svg"
       }
     ]
   }

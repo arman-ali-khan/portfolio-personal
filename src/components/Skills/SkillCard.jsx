@@ -1,7 +1,5 @@
 import { IconContext } from "react-icons";
-import parse from 'html-react-parser';
-
-
+import parse from "html-react-parser";
 
 import {
   DiPhotoshop,
@@ -33,49 +31,44 @@ import React from "react";
 const SkillCard = ({ tech, collapsOn, setCollapsOn }) => {
   // get stacks from tech
   const stacks = tech?.stacks;
-  const TechComponent = eval(tech?.icon);
   return (
-      <div
-        onClick={() => setCollapsOn(false)}
-        tabIndex={tech.id}
-        className={`collapse ${
-          collapsOn && tech.id === 1 ? "collapse-open" : ""
-        } collapse-arrow border border-base-300 bg-base-200`}
-      >
-        <div className="collapse-title text-xl font-medium">
-          <div className="flex items-center gap-3">
-            <span>
-              {/* tech icon */}
-              {<TechComponent size='44' />}
-            </span>
-            <div>
-              {/* Tech Title */}
-              <h2 className="font-bold">{tech?.title}</h2>
-              {/* tech experience */}
-              <p className="text-sm">More than {tech?.experience} years</p>
-            </div>
+    <div
+      onClick={() => setCollapsOn(false)}
+      tabIndex={tech.id}
+      className={`collapse ${
+        collapsOn && tech.id === 1 ? "collapse-open" : ""
+      } collapse-arrow border border-base-300 bg-base-200`}
+    >
+      <div className="collapse-title text-xl font-medium">
+        <div className="flex items-center gap-3">
+          <span>
+            {/* tech icon */}
+            
+            <img className="w-10" src={tech?.icon} />
+          </span>
+          <div>
+            {/* Tech Title */}
+            <h2 className="font-bold">{tech?.title}</h2>
+            {/* tech experience */}
+            <p className="text-sm">More than {tech?.experience} years</p>
           </div>
         </div>
-        <div className="collapse-content flex gap-4 flex-wrap">
-          {/* stack skills */}
-          {stacks.map((stack, i) => {
-            const IconComponent = eval(stack?.icon);
-            let iconComponent = React.createElement(IconComponent,{size:32});
-           
-
-          console.log(iconComponent,'iconComponent')
-            return (
-              <div key={i} className="flex items-center gap-1">
-                {/* stack icon */}
-                {iconComponent}
-                {/* <span><SiCanva /></span> */}
-                {/* stack title */}
-                <p>{stack.title}</p>
-              </div>
-            );
-          })}
-        </div>
       </div>
+      <div className="collapse-content flex gap-4 flex-wrap">
+        {/* stack skills */}
+        {stacks.map((stack, i) => {
+          return (
+            <div key={i} className="flex items-center gap-1">
+              {/* stack icon */}
+              <img src={stack?.icon} />
+              {/* <span><SiCanva /></span> */}
+              {/* stack title */}
+              <p>{stack.title}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 
