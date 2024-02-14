@@ -55,7 +55,7 @@ body {
     @apply flex sm:flex-col lg:flex-row my-3 sm:my-0 justify-between sm:text-center mx-auto space-x-3 items-center;
   }
   .de-skill {
-    @apply w-full flex flex-col-reverse items-center sm:flex-row;
+    @apply w-full flex flex-col-reverse items-center sm:flex-row py-4;
   }
   .de-parallax-wrap {
     @apply w-9/12 my-4 flex items-center sm:my-0 mx-auto h-full;

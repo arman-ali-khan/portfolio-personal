@@ -1,6 +1,6 @@
 {
   "name": ["John Doe", "Developer", "Designer"],
-  "image": "https://personal-portfolio-vite.vercel.app/stock-1.png",
+  "image": "/images/hero.png",
   "title": "Full-Stack Developer",
   "description": "High level experience in web design and web development knowledge, producing quality work.",
   "resumeUrl": "#",
