@@ -6,7 +6,7 @@ import { BiEnvelope } from "react-icons/bi";
 import { FiPhoneCall } from "react-icons/fi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { Parallax } from "react-scroll-parallax";
-import useGetData from "../lib/useGetData";
+import useGetData from "../../lib/useGetData";
 
 const Contact = () => {
   // react hook form
@@ -50,8 +50,7 @@ const Contact = () => {
   };
 
   // get about data
-  const { data } = useGetData('/data/about.json');
-  
+  const {data} = useGetData('/data/about.json')
   return (
     <section className="de-container">
       {/* Title */}
@@ -137,7 +136,7 @@ const Contact = () => {
                     <div className="ml-6 grow">
                       <p className="font-bold">Call Me</p>
                       {/* Phone number */}
-                      <p className="text-neutral-500">{data?.phone || "+1 234-567-89"}</p>
+                      <p className="text-neutral-500">{data?.phone}</p>
                     </div>
                   </div>
                 </div>
@@ -152,7 +151,7 @@ const Contact = () => {
                     <div className="ml-6 grow">
                       <p className="font-bold">Email</p>
                       {/* Email address */}
-                      <p className="text-neutral-500">{data?.email || "email@example.com"}</p>
+                      <p className="text-neutral-500">{data?.email}</p>
                     </div>
                   </div>
                 </div>
@@ -168,7 +167,7 @@ const Contact = () => {
                       <p className="font-bold">Address</p>
                       <p className="text-neutral-500">
                         {/* Address */}
-                        {data?.address || "New York - Metrotech Center, Brooklyn, #11201"}
+                        {data?.address}
                       </p>
                     </div>
                   </div>

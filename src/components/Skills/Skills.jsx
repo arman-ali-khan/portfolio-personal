@@ -1,32 +1,15 @@
+// skills animation
 import { useState } from "react";
 import { Parallax } from "react-scroll-parallax";
-import useGetData from "../../lib/useGetData";
+import useGetData from "../../../lib/useGetData";
 import SkillCard from "./SkillCard";
+// import animation json
 
 const Skills = () => {
   // tech and experience
-  const { data: techStack, loading, error } = useGetData("/data/skills.json");
-  // collapse on
+  const { data: techStack } = useGetData("/data/skills.json");
+  // collaps on
   const [collapseOn, setCollapseOn] = useState(true);
-
-  // error handling
-  if (loading) return (
-    <div className="flex justify-center items-center h-64">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
-    </div>
-  );
-  
-  if (error) return (
-    <div className="text-center text-red-400 p-8">
-      <p>Error loading skills data: {error.message}</p>
-    </div>
-  );
-
-  if (!techStack || !Array.isArray(techStack)) return (
-    <div className="text-center text-gray-400 p-8">
-      <p>No skills data available</p>
-    </div>
-  );
 
   return (
     <section className="de-container">
@@ -61,19 +44,18 @@ const Skills = () => {
               <img
                 src="/logos/logo-code.png"
                 className="w-24 rotate-180 rounded-full xl:w-44"
-                alt="Code"
               />
               <div className="de-logo-wrap w-14 -left-7">
-                <img src="/logos/logo-js.png" className="de-logo" alt="JavaScript" />
+                <img src="/logos/logo-js.png" className="de-logo" />
               </div>
               <div className="de-logo-wrap w-14 -right-7">
-                <img src="/logos/logo-mysql.png" className="de-logo" alt="MySQL" />
+                <img src="/logos/logo-mysql.png" className="de-logo" />
               </div>
               <div className="de-logo-wrap w-14 -top-7">
-                <img src="/logos/logo-mongo.png" className="de-logo" alt="MongoDB" />
+                <img src="/logos/logo-mongo.png" className="de-logo" />
               </div>
               <div className="de-logo-wrap w-14 -bottom-7">
-                <img src="/logos/logo-react.png" className="de-logo" alt="React" />
+                <img src="/logos/logo-react.png" className="de-logo" />
               </div>
             </Parallax>
           </div>

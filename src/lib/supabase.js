@@ -3,25 +3,10 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-// Only create client if environment variables are properly set
-export const supabase = supabaseUrl && supabaseAnonKey && 
-  supabaseUrl !== 'your_supabase_url_here' && 
-  supabaseAnonKey !== 'your_supabase_anon_key_here' 
-  ? createClient(supabaseUrl, supabaseAnonKey) 
-  : null;
-
-// Check if Supabase is available
-export const isSupabaseAvailable = () => {
-  return supabase !== null;
-};
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Visitor tracking
 export const trackVisitor = async (visitorData) => {
-  if (!isSupabaseAvailable()) {
-    console.log('Supabase not configured, skipping visitor tracking');
-    return null;
-  }
-
   try {
     const { data, error } = await supabase
       .from('visitors')
@@ -38,11 +23,6 @@ export const trackVisitor = async (visitorData) => {
 
 // Get visitor analytics
 export const getVisitorAnalytics = async () => {
-  if (!isSupabaseAvailable()) {
-    console.log('Supabase not configured, returning empty analytics');
-    return [];
-  }
-
   try {
     const { data, error } = await supabase
       .from('visitors')
@@ -59,15 +39,10 @@ export const getVisitorAnalytics = async () => {
 
 // Portfolio management
 export const updatePortfolioData = async (section, data) => {
-  if (!isSupabaseAvailable()) {
-    console.log('Supabase not configured, cannot update portfolio data');
-    return null;
-  }
-
   try {
     const { data: result, error } = await supabase
       .from('portfolio_data')
-      .upsert({ section, data })
+      .upsert({ section, data }, { onConflict: 'section' })
       .select()
     
     if (error) throw error
@@ -79,10 +54,6 @@ export const updatePortfolioData = async (section, data) => {
 }
 
 export const getPortfolioData = async (section) => {
-  if (!isSupabaseAvailable()) {
-    return null;
-  }
-
   try {
     const { data, error } = await supabase
       .from('portfolio_data')
@@ -90,13 +61,39 @@ export const getPortfolioData = async (section) => {
       .eq('section', section)
       .single()
     
-    if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
-      throw error;
-    }
-    
-    return data?.data || null;
+    if (error && error.code !== 'PGRST116') throw error
+    return data?.data || null
   } catch (error) {
     console.error('Error fetching portfolio data:', error)
     return null
+  }
+}
+
+export const getAllPortfolioData = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('portfolio_data')
+      .select('*')
+    
+    if (error) throw error
+    return data
+  } catch (error) {
+    console.error('Error fetching all portfolio data:', error)
+    return []
+  }
+}
+
+export const deletePortfolioData = async (section) => {
+  try {
+    const { error } = await supabase
+      .from('portfolio_data')
+      .delete()
+      .eq('section', section)
+    
+    if (error) throw error
+    return true
+  } catch (error) {
+    console.error('Error deleting portfolio data:', error)
+    return false
   }
 }

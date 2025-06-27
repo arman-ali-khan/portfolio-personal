@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { BsDiscord, BsMoonStars, BsSun } from "react-icons/bs";
 import { CgFacebook, CgTwitter } from "react-icons/cg";
 import Bottombar from "./Bottombar";
-import useGetData from "../lib/useGetData";
-
+import useGetData from "../../lib/useGetData";
 const Footer = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
@@ -22,7 +21,6 @@ const Footer = () => {
 
   // social urls
   const { data } = useGetData("/data/personal.json");
-  
   return (
     <footer className="bg-base-200 overflow-hidden">
       <div data-aos="flip-down" className="de-footer-wrap">
@@ -45,7 +43,7 @@ const Footer = () => {
           {/* Footer Social Links */}
           <div className="grid grid-flow-col gap-4">
             <a
-              href={data?.social?.facebook || "#"}
+              href={data?.social?.facebook}
               className="de-facebook"
               target="_blank"
               rel="noreferrer"
@@ -54,7 +52,7 @@ const Footer = () => {
               <CgFacebook size={22} />
             </a>
             <a
-              href={data?.social?.twitter || "#"}
+              href={data?.social?.twitter}
               className="de-twitter"
               target="_blank"
               rel="noreferrer"
@@ -63,7 +61,7 @@ const Footer = () => {
               <CgTwitter size={22} />
             </a>
             <a
-              href={data?.social?.discord || "#"}
+              href={data?.social?.discord}
               className="de-discord"
               target="_blank"
               rel="noreferrer"

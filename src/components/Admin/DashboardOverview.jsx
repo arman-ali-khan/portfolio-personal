@@ -6,10 +6,9 @@ import {
   FiTrendingUp, 
   FiMonitor,
   FiSmartphone,
-  FiTablet,
-  FiAlertCircle
+  FiTablet
 } from "react-icons/fi";
-import { getVisitorAnalytics, isSupabaseAvailable } from "../../lib/supabase";
+import { getVisitorAnalytics } from "../../lib/supabase";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 const DashboardOverview = () => {
@@ -20,18 +19,15 @@ const DashboardOverview = () => {
     uniqueCountries: 0,
     deviceTypes: {}
   });
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAnalytics();
   }, []);
 
   const fetchAnalytics = async () => {
-    setLoading(true);
     const data = await getVisitorAnalytics();
     setAnalytics(data);
     calculateStats(data);
-    setLoading(false);
   };
 
   const calculateStats = (data) => {
@@ -56,174 +52,47 @@ const DashboardOverview = () => {
     });
   };
 
-  // Generate sample data if no real data available
-  const chartData = analytics.length > 0 
-    ? analytics.slice(0, 7).reverse().map((visitor, index) => ({
-        date: new Date(visitor.created_at).toLocaleDateString(),
-        visitors: index + 1
-      }))
-    : [
-        { date: '12/20', visitors: 12 },
-        { date: '12/21', visitors: 19 },
-        { date: '12/22', visitors: 15 },
-        { date: '12/23', visitors: 25 },
-        { date: '12/24', visitors: 22 },
-        { date: '12/25', visitors: 30 },
-        { date: '12/26', visitors: 28 }
-      ];
+  const chartData = analytics.slice(0, 7).reverse().map(visitor => ({
+    date: new Date(visitor.created_at).toLocaleDateString(),
+    visitors: 1
+  }));
 
-  const deviceData = Object.keys(stats.deviceTypes).length > 0
-    ? Object.entries(stats.deviceTypes).map(([device, count]) => ({
-        name: device,
-        value: count,
-        color: device === 'mobile' ? '#8B5CF6' : device === 'tablet' ? '#06B6D4' : '#10B981'
-      }))
-    : [
-        { name: 'Desktop', value: 65, color: '#10B981' },
-        { name: 'Mobile', value: 30, color: '#8B5CF6' },
-        { name: 'Tablet', value: 5, color: '#06B6D4' }
-      ];
+  const deviceData = Object.entries(stats.deviceTypes).map(([device, count]) => ({
+    name: device,
+    value: count,
+    color: device === 'mobile' ? '#8B5CF6' : device === 'tablet' ? '#06B6D4' : '#10B981'
+  }));
 
   const statCards = [
     {
       title: "Total Visitors",
-      value: stats.totalVisitors || 1234,
+      value: stats.totalVisitors,
       icon: FiUsers,
       color: "from-blue-600 to-blue-700",
       change: "+12%"
     },
     {
       title: "Today's Visitors",
-      value: stats.todayVisitors || 45,
+      value: stats.todayVisitors,
       icon: FiTrendingUp,
       color: "from-green-600 to-green-700",
       change: "+5%"
     },
     {
       title: "Countries",
-      value: stats.uniqueCountries || 23,
+      value: stats.uniqueCountries,
       icon: FiGlobe,
       color: "from-purple-600 to-purple-700",
       change: "+3%"
     },
     {
       title: "Active Sessions",
-      value: Math.floor((stats.totalVisitors || 123) * 0.1),
+      value: Math.floor(stats.totalVisitors * 0.1),
       icon: FiMonitor,
       color: "from-orange-600 to-orange-700",
       change: "+8%"
     }
   ];
-
-  if (!isSupabaseAvailable()) {
-    return (
-      <div className="space-y-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-6"
-        >
-          <div className="flex items-center space-x-3">
-            <FiAlertCircle className="text-yellow-400 text-xl" />
-            <div>
-              <h3 className="text-lg font-semibold text-yellow-400">Supabase Not Connected</h3>
-              <p className="text-yellow-300 text-sm">
-                Connect to Supabase to enable real-time analytics and visitor tracking. 
-                Showing demo data for now.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Show demo dashboard */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {statCards.map((card, index) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-gray-800/50 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm font-medium">{card.title}</p>
-                  <p className="text-2xl font-bold text-white mt-1">{card.value}</p>
-                  <p className="text-green-400 text-sm mt-1">{card.change} from last week</p>
-                </div>
-                <div className={`w-12 h-12 bg-gradient-to-r ${card.color} rounded-lg flex items-center justify-center`}>
-                  <card.icon className="text-white text-xl" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-gray-800/50 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6"
-          >
-            <h3 className="text-xl font-semibold text-white mb-4">Visitor Trends (Demo)</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                <XAxis dataKey="date" stroke="#9CA3AF" />
-                <YAxis stroke="#9CA3AF" />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#1F2937', 
-                    border: '1px solid #8B5CF6',
-                    borderRadius: '8px'
-                  }}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="visitors" 
-                  stroke="#8B5CF6" 
-                  strokeWidth={2}
-                  dot={{ fill: '#8B5CF6', strokeWidth: 2, r: 4 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-gray-800/50 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6"
-          >
-            <h3 className="text-xl font-semibold text-white mb-4">Device Types (Demo)</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={deviceData}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                >
-                  {deviceData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </motion.div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -331,30 +200,22 @@ const DashboardOverview = () => {
               </tr>
             </thead>
             <tbody>
-              {analytics.length > 0 ? (
-                analytics.slice(0, 5).map((visitor, index) => (
-                  <tr key={index} className="border-b border-gray-700/50">
-                    <td className="py-3 px-4 text-white">
-                      {visitor.city}, {visitor.country}
-                    </td>
-                    <td className="py-3 px-4 text-gray-300">
-                      {visitor.device_type || 'Desktop'}
-                    </td>
-                    <td className="py-3 px-4 text-gray-300">
-                      {visitor.browser}
-                    </td>
-                    <td className="py-3 px-4 text-gray-300">
-                      {new Date(visitor.created_at).toLocaleTimeString()}
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr className="border-b border-gray-700/50">
-                  <td colSpan="4" className="py-8 px-4 text-center text-gray-400">
-                    No visitor data available. Connect to Supabase to start tracking visitors.
+              {analytics.slice(0, 5).map((visitor, index) => (
+                <tr key={index} className="border-b border-gray-700/50">
+                  <td className="py-3 px-4 text-white">
+                    {visitor.city}, {visitor.country}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {visitor.device_type || 'Desktop'}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {visitor.browser}
+                  </td>
+                  <td className="py-3 px-4 text-gray-300">
+                    {new Date(visitor.created_at).toLocaleTimeString()}
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>

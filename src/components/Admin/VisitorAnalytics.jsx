@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FiDownload, FiFilter, FiSearch, FiMapPin, FiMonitor, FiAlertCircle } from "react-icons/fi";
-import { getVisitorAnalytics, isSupabaseAvailable } from "../../lib/supabase";
+import { FiDownload, FiFilter, FiSearch, FiMapPin, FiMonitor } from "react-icons/fi";
+import { getVisitorAnalytics } from "../../lib/supabase";
 
 const VisitorAnalytics = () => {
   const [visitors, setVisitors] = useState([]);
@@ -45,10 +45,6 @@ const VisitorAnalytics = () => {
   };
 
   const exportData = () => {
-    if (filteredVisitors.length === 0) {
-      return;
-    }
-
     const csvContent = [
       ["IP Address", "Country", "City", "Device", "Browser", "OS", "Screen Resolution", "Visit Time"],
       ...filteredVisitors.map(visitor => [
@@ -72,45 +68,6 @@ const VisitorAnalytics = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  if (!isSupabaseAvailable()) {
-    return (
-      <div className="space-y-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-6"
-        >
-          <div className="flex items-center space-x-3">
-            <FiAlertCircle className="text-yellow-400 text-xl" />
-            <div>
-              <h3 className="text-lg font-semibold text-yellow-400">Supabase Not Connected</h3>
-              <p className="text-yellow-300 text-sm">
-                Connect to Supabase to enable visitor analytics and tracking.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-800/50 backdrop-blur-xl border border-purple-500/30 rounded-xl p-6"
-        >
-          <h2 className="text-2xl font-bold text-white mb-2">Visitor Analytics</h2>
-          <p className="text-gray-400 mb-6">Connect to Supabase to view detailed visitor information</p>
-          
-          <div className="text-center py-12">
-            <FiMonitor className="mx-auto text-6xl text-gray-600 mb-4" />
-            <p className="text-gray-400 text-lg">No visitor data available</p>
-            <p className="text-gray-500 text-sm mt-2">
-              Set up Supabase connection to start tracking visitors
-            </p>
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -132,8 +89,7 @@ const VisitorAnalytics = () => {
         </div>
         <button
           onClick={exportData}
-          disabled={filteredVisitors.length === 0}
-          className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-violet-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-violet-700 transition-all duration-200 disabled:opacity-50"
+          className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-violet-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-violet-700 transition-all duration-200"
         >
           <FiDownload />
           <span>Export CSV</span>
@@ -239,12 +195,7 @@ const VisitorAnalytics = () => {
 
         {filteredVisitors.length === 0 && (
           <div className="text-center py-8">
-            <p className="text-gray-400">
-              {visitors.length === 0 
-                ? "No visitors tracked yet. Visitor tracking will start automatically once users visit your portfolio."
-                : "No visitors found matching your criteria."
-              }
-            </p>
+            <p className="text-gray-400">No visitors found matching your criteria.</p>
           </div>
         )}
       </motion.div>

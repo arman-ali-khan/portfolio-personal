@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
   FiHome, 
-  FiBarChart3, 
+  FiBarChart, 
   FiEdit3, 
   FiSettings, 
   FiUsers,
@@ -14,7 +14,7 @@ const AdminSidebar = ({ isOpen }) => {
 
   const menuItems = [
     { path: "/admin/dashboard", icon: FiHome, label: "Dashboard" },
-    { path: "/admin/analytics", icon: FiBarChart3, label: "Analytics" },
+    { path: "/admin/analytics", icon: FiBarChart, label: "Analytics" },
     { path: "/admin/content", icon: FiEdit3, label: "Content" },
     { path: "/admin/settings", icon: FiSettings, label: "Settings" },
   ];

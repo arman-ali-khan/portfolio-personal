@@ -9,30 +9,12 @@ import "swiper/css/navigation";
 import { TfiQuoteLeft, TfiQuoteRight } from "react-icons/tfi";
 import { Parallax } from "react-scroll-parallax";
 import { Navigation } from "swiper/modules";
-import useGetData from "../lib/useGetData";
+import useSWR from "swr";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Testimonial() {
   // testimonial data
-  const { data: testimonialData, loading, error } = useGetData("/data/testimonial.json");
-
-  // error handling
-  if (loading) return (
-    <div className="flex justify-center items-center h-64">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
-    </div>
-  );
-  
-  if (error) return (
-    <div className="text-center text-red-400 p-8">
-      <p>Error loading testimonial data: {error.message}</p>
-    </div>
-  );
-
-  if (!testimonialData || !Array.isArray(testimonialData)) return (
-    <div className="text-center text-gray-400 p-8">
-      <p>No testimonial data available</p>
-    </div>
-  );
+  const { data: testimonialData } = useSWR("/data/testimonial.json", fetcher);
 
   return (
     <section className="de-container">

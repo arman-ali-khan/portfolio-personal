@@ -1,37 +1,18 @@
 import { useEffect } from 'react'
 import UAParser from 'ua-parser-js'
-import { trackVisitor, isSupabaseAvailable } from '../lib/supabase'
+import { trackVisitor } from '../lib/supabase'
 
 export const useVisitorTracking = () => {
   useEffect(() => {
     const trackCurrentVisitor = async () => {
-      // Skip tracking if Supabase is not configured
-      if (!isSupabaseAvailable()) {
-        console.log('Visitor tracking disabled - Supabase not configured');
-        return;
-      }
-
       try {
         // Get user agent info
         const parser = new UAParser()
         const result = parser.getResult()
         
         // Get IP and location info
-        let ipData = {};
-        try {
-          const ipResponse = await fetch('https://ipapi.co/json/')
-          ipData = await ipResponse.json()
-        } catch (error) {
-          console.log('Could not fetch IP data, using defaults');
-          ipData = {
-            ip: 'Unknown',
-            country_name: 'Unknown',
-            city: 'Unknown',
-            region: 'Unknown',
-            timezone: 'Unknown',
-            org: 'Unknown'
-          };
-        }
+        const ipResponse = await fetch('https://ipapi.co/json/')
+        const ipData = await ipResponse.json()
         
         // Get screen info
         const screenInfo = {
