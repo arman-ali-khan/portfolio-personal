@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
-import { FiSave, FiEdit3, FiImage, FiLink } from "react-icons/fi";
-import { updatePortfolioData, getPortfolioData } from "../../lib/supabase";
+import { FiSave, FiEdit3, FiImage, FiLink, FiAlertCircle } from "react-icons/fi";
+import { updatePortfolioData, getPortfolioData, isSupabaseAvailable } from "../../lib/supabase";
 
 const ContentManager = () => {
   const [activeSection, setActiveSection] = useState("personal");
@@ -23,7 +23,13 @@ const ContentManager = () => {
 
   const loadSectionData = async () => {
     try {
-      const data = await getPortfolioData(activeSection);
+      let data = null;
+      
+      // Try to get data from Supabase first if available
+      if (isSupabaseAvailable()) {
+        data = await getPortfolioData(activeSection);
+      }
+      
       if (data) {
         setFormData(data);
       } else {
@@ -34,10 +40,24 @@ const ContentManager = () => {
       }
     } catch (error) {
       console.error("Error loading section data:", error);
+      // Try to load from JSON as fallback
+      try {
+        const response = await fetch(`/data/${activeSection}.json`);
+        const defaultData = await response.json();
+        setFormData(defaultData);
+      } catch (fallbackError) {
+        console.error("Error loading fallback data:", fallbackError);
+        toast.error("Error loading section data");
+      }
     }
   };
 
   const handleSave = async () => {
+    if (!isSupabaseAvailable()) {
+      toast.error("Supabase not connected. Cannot save changes.");
+      return;
+    }
+
     setLoading(true);
     try {
       await updatePortfolioData(activeSection, formData);
@@ -262,6 +282,24 @@ const ContentManager = () => {
         <p className="text-gray-400">Edit and manage your portfolio content</p>
       </motion.div>
 
+      {!isSupabaseAvailable() && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-yellow-900/20 border border-yellow-500/30 rounded-xl p-6"
+        >
+          <div className="flex items-center space-x-3">
+            <FiAlertCircle className="text-yellow-400 text-xl" />
+            <div>
+              <h3 className="text-lg font-semibold text-yellow-400">Supabase Not Connected</h3>
+              <p className="text-yellow-300 text-sm">
+                Connect to Supabase to save content changes. You can still edit content, but changes won't be saved.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -301,7 +339,7 @@ const ContentManager = () => {
               </h3>
               <button
                 onClick={handleSave}
-                disabled={loading}
+                disabled={loading || !isSupabaseAvailable()}
                 className="flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-violet-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-violet-700 transition-all duration-200 disabled:opacity-50"
               >
                 <FiSave />

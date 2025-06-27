@@ -2,14 +2,30 @@ import { BsMouse3 } from "react-icons/bs";
 import { FiDownload, FiFacebook, FiGithub, FiLinkedin } from "react-icons/fi";
 import { Parallax } from "react-scroll-parallax";
 import { Typewriter } from "react-simple-typewriter";
-import useGetData from "../../lib/useGetData";
+import useGetData from "../lib/useGetData";
 
 const Hero = () => {
   // get personal data
   const { data, loading, error } = useGetData("/data/personal.json");
+  
   // error handling
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+    </div>
+  );
+  
+  if (error) return (
+    <div className="text-center text-red-400 p-8">
+      <p>Error loading personal data: {error.message}</p>
+    </div>
+  );
+
+  if (!data) return (
+    <div className="text-center text-gray-400 p-8">
+      <p>No personal data available</p>
+    </div>
+  );
 
   return (
     <section className="container mx-auto overflow-hidden">
@@ -21,7 +37,7 @@ const Hero = () => {
               <li>
                 <a
                   className="link"
-                  href={data.social.facebook}
+                  href={data.social?.facebook || "#"}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -32,7 +48,7 @@ const Hero = () => {
               <li>
                 <a
                   className="link"
-                  href={data.social.github}
+                  href={data.social?.github || "#"}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -43,11 +59,11 @@ const Hero = () => {
               <li>
                 <a
                   className="link"
-                  href={data.social.linkedin}
+                  href={data.social?.linkedin || "#"}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {/* Linkeding Icon */}
+                  {/* LinkedIn Icon */}
                   <FiLinkedin size={24} />
                 </a>
               </li>
@@ -61,7 +77,7 @@ const Hero = () => {
             <h1 className="text-2xl md:text-4xl font-bold">
               Hi, I&apos;m {/* Typewriter Animation Text */}
               <Typewriter
-                words={data.name}
+                words={data.name || ["Developer"]}
                 loop
                 cursor
                 cursorStyle="_"
@@ -76,13 +92,13 @@ const Hero = () => {
             <p>{data.title}</p>
           </div>
           <div className="de-description">
-            {/* Sort Description */}
+            {/* Short Description */}
             <p>{data.description}</p>
           </div>
           <div className="de-resume">
             {/* Resume Link */}
             <a
-              href={data.resumeUrl}
+              href={data.resumeUrl || "#"}
               target="_blank"
               rel="noreferrer"
               className="de-resume-link"
@@ -99,14 +115,15 @@ const Hero = () => {
           {/* Hero image */}
           <div className="md:w-3/5 flex items-center gap-2">
             <div className="w-14 sm:24 sm:hidden">
-              <div className=" ">
+              <div className="">
                 <ul className="flex flex-col gap-6">
                   <li>
                     {/* facebook link */}
                     <a
                       className="link"
-                      href={data.social.facebook}
+                      href={data.social?.facebook || "#"}
                       target="_blank"
+                      rel="noreferrer"
                     >
                       {/* facebook icon */}
                       <FiFacebook size={24} />
@@ -116,10 +133,11 @@ const Hero = () => {
                     {/* Github link */}
                     <a
                       className="link"
-                      href={data.social.github}
+                      href={data.social?.github || "#"}
                       target="_blank"
+                      rel="noreferrer"
                     >
-                      {/* Github lcon */}
+                      {/* Github icon */}
                       <FiGithub size={24} />
                     </a>
                   </li>
@@ -127,8 +145,9 @@ const Hero = () => {
                     {/* Linkedin link */}
                     <a
                       className="link"
-                      href={data.social.linkedin}
+                      href={data.social?.linkedin || "#"}
                       target="_blank"
+                      rel="noreferrer"
                     >
                       {/* Linkedin icon */}
                       <FiLinkedin size={24} />
@@ -140,7 +159,7 @@ const Hero = () => {
             <div data-aos="zoom-in" className="de-hero-image">
               {/* hero image */}
               <Parallax speed={-5}>
-                <img className="w-full h-full" src={data.image} alt="" />
+                <img className="w-full h-full" src={data.image} alt="Hero" />
               </Parallax>
             </div>
           </div>
